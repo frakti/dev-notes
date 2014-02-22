@@ -1,5 +1,6 @@
 # Installing Guest Addons (RHEL-based systems) 
 
+```bash
   mount -r /dev/cdrom /media/cdrom
   su - 
   yum update kernel*
@@ -9,13 +10,18 @@
   export KERN_DIR
   /media/cdrom/VBoxLinuxAdditions.run
   reboot
+```
   
 # Expanding size of the disk
+### Resources
+  * [GParted Live ISO](http://gparted.sourceforge.net/download.php)
 
+### Steps
+```bash
   VBoxManage clonehd --format VDI box-disk1.wmdk disk.vdi
   VboxManage modifyhd disk.vdi --resize 10240 # In MB
   # Attach *.vdi HD as SATA controller
-  # Mount GParted Live ISO -http://gparted.sourceforge.net/download.php
+  # Mount GParted Live ISO
   # launch VM and extend disk using GPareted, then do reboot
   lvm vgdisplay | grep Free
   # => Free  PE / Size       122880 / 480.00 GiB
@@ -26,6 +32,7 @@
   lsblk
   # Check
   fallocate -l 480G /test_file
+```
   
   
   
